@@ -39,7 +39,7 @@ print df_1d
 
 # Join data sets
 df = df_1h.merge(df_1d, on="Date", how="left")
-
+print df
 # Start the backtest simulation
 capital = 1000.0  # initial capital value in USDT
 crypto = 0  # the initial amount of crypto
