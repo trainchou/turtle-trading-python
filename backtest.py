@@ -5,9 +5,10 @@ from plotly.graph_objs import *
 
 # Data obtained from Binance on 2020-02-04
 # Read data with 1 day ticks, it will be used to compute indicators
-df_1d = pd.read_csv("data/BTCUSDT_1day_ticks.csv")  # you can change here for ETH
+#df_1d = pd.read_csv("data/BTCUSDT_1day_ticks.csv")  # you can change here for ETH
+df_1d = pd.read_csv("data/BTCUSDT.csv")  # you can change here for ETH
 # Read data with 1 hour ticks, it will be used to simulate price monitoring
-df_1h = pd.read_csv("data/BTCUSDT_1hour_ticks.csv")  # you can change here for ETH
+df_1h = pd.read_csv("data/abc.csv")  # you can change here for ETH
 
 # Compute indicators
 df_1d["Close_1_shift"] = df_1d["Close"].shift(1)  # previous day Close value
@@ -34,6 +35,7 @@ df_1d["N"] = n_array
 # Compute upper and lower bounds based on Turtle Algorithm
 df_1d["upper_bound"] = df_1d["High"].shift(1).rolling(window=20).max()
 df_1d["lower_bound"] = df_1d["Low"].shift(1).rolling(window=10).min()
+print df_1d
 
 # Join data sets
 df = df_1h.merge(df_1d, on="Date", how="left")
@@ -41,7 +43,7 @@ df = df_1h.merge(df_1d, on="Date", how="left")
 # Start the backtest simulation
 capital = 1000.0  # initial capital value in USDT
 crypto = 0  # the initial amount of crypto
-fees = 0.001  # fees as 0.1%
+fees = 0.008  # fees as 0.08%
 positions = []  # list to keep current positions
 success_history = []  # list to keep successful positions
 failure_history = []  # list to keep failed positions
